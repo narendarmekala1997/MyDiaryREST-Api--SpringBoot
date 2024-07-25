@@ -1,15 +1,27 @@
 package com.naren.springbootmydiaryrestapi.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 @Configuration
 public class SecurityConfig {
 	
+	
 	@Bean
+	public UserDetailsManager configureDataSource(DataSource datasource) {
+		
+		UserDetailsManager userDetailsManager = new JdbcUserDetailsManager(datasource);
+		return userDetailsManager;
+	}
+	
+	/*@Bean
 	public InMemoryUserDetailsManager getudm() {
 		
 		
@@ -21,7 +33,7 @@ public class SecurityConfig {
 		InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user1,user2,user3);
 	
 		return inMemoryUserDetailsManager;
-	}
+	}*/
 	
 	
 
